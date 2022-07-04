@@ -12,3 +12,8 @@ devmale:
   password: ${THEMEKIT_PASSWORD}
   theme_id: "133883658481"
   store: gonzaserra-test.myshopify.com
+
+tarea2:
+  password: ${THEMEKIT_PASSWORD}
+  theme_id: "133884969203"
+  store: gonzaserra-test.myshopify.com
