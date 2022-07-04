@@ -17,3 +17,8 @@ tarea2:
   password: ${THEMEKIT_PASSWORD}
   theme_id: "133884969203"
   store: gonzaserra-test.myshopify.com
+
+tarea3:
+  password: ${THEMEKIT_PASSWORD}
+  theme_id: "133887918323"
+  store: gonzaserra-test.myshopify.com
