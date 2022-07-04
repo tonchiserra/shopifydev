@@ -1,0 +1,14 @@
+master:
+  password: ${THEMEKIT_PASSWORD}
+  theme_id: "133264179443"
+  store: gonzaserra-test.myshopify.com
+
+test:
+  password: ${THEMEKIT_PASSWORD}
+  theme_id: "133883658483"
+  store: gonzaserra-test.myshopify.com
+
+devmale:
+  password: ${THEMEKIT_PASSWORD}
+  theme_id: "133883658481"
+  store: gonzaserra-test.myshopify.com
