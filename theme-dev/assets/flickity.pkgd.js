@@ -3197,6 +3197,8 @@ PrevNextButton.prototype.onclick = function() {
   this.parent.uiChange();
   var method = this.isPrevious ? 'previous' : 'next';
   this.parent[ method ]();
+
+  document.dispatchEvent(new CustomEvent("prevNextBtn:clicked", {}))
 };
 
 // -----  ----- //
@@ -3333,6 +3335,7 @@ PageDots.prototype._create = function() {
   this.dots = [];
   // events
   this.handleClick = this.onClick.bind( this );
+  this.handleVariantClick = this.variantClick.bind( this );
   this.on( 'pointerDown', this.parent.childUIPointerDown.bind( this.parent ) );
 };
 
@@ -3342,6 +3345,9 @@ PageDots.prototype.activate = function() {
   this.bindStartEvent( this.holder );
   // add to DOM
   this.parent.element.appendChild( this.holder );
+  this.dots.forEach(dot => {
+    dot.addEventListener( 'variant:changed', this.handleVariantClick );
+  })
 };
 
 PageDots.prototype.deactivate = function() {
@@ -3405,6 +3411,20 @@ PageDots.prototype.updateSelected = function() {
 
 PageDots.prototype.onTap = // old method name, backwards-compatible
 PageDots.prototype.onClick = function( event ) {
+  var target = event.target;
+  // only care about dot clicks
+  if ( target.nodeName != 'LI' ) {
+    return;
+  }
+
+  this.parent.uiChange();
+  var index = this.dots.indexOf( target );
+  this.parent.select( index );
+
+  document.dispatchEvent(new CustomEvent("prevNextBtn:clicked", {}))
+};
+
+PageDots.prototype.variantClick = function( event ) {
   var target = event.target;
   // only care about dot clicks
   if ( target.nodeName != 'LI' ) {

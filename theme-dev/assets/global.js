@@ -784,20 +784,16 @@ class VariantSelects extends HTMLElement {
     if (!this.currentVariant) return;
     if (!this.currentVariant.featured_media) return;
 
-    //const mediaGallery = document.getElementById(`MediaGallery-${this.dataset.section}`);
-    let mainImgContainer = document.querySelector(".main-img-container")
+    let mainCarousel = document.querySelector('.main-carousel')
+    let cells = [...mainCarousel.querySelectorAll('.carousel-cell')]
+    let dots = [...mainCarousel.querySelectorAll('.dot')]
 
-    //mediaGallery.setActiveMedia(`${this.dataset.section}-${this.currentVariant.featured_media.id}`, true);
-    let img = [...document.querySelectorAll("#img-container")]
-    img = img.find(image => image.alt.split("#").pop() === this.currentVariant.option1.toLowerCase())
-    let src = img.dataset.img.split("-")[0]
-    let alt = img.dataset.img.split("-")[1]
-    mainImgContainer.innerHTML = `<img src="${src}" alt="${alt}">`
-
-    const modalContent = document.querySelector(`#ProductModal-${this.dataset.section} .product-media-modal__content`);
-    if (!modalContent) return;
-    const newMediaModal = modalContent.querySelector( `[data-media-id="${this.currentVariant.featured_media.id}"]`);
-    modalContent.prepend(newMediaModal);
+    cells.find((cell, i) => {
+      if(cell.children[0].alt.split("#").pop() === this.currentVariant.option1.toLowerCase()) {
+        dots[i].dispatchEvent(new CustomEvent('variant:changed', {}))
+        return cell
+      }
+    })
   }
 
   updateURL() {

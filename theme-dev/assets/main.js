@@ -2,7 +2,12 @@ document.addEventListener("cart:added", () => handleFreeShippingBar())
 document.addEventListener("change", e => handleVariant(e))
 document.addEventListener("submit", e => addToCart(e))
 document.addEventListener("DOMContentLoaded", () => createCarousel())
-document.addEventListener("click", e => changeImg(e))
+document.addEventListener("click", e => {
+  if(e.target.id === 'img-container') {
+    handleImg(e)
+  }
+})
+document.addEventListener("prevNextBtn:clicked", () => handleImg())
 
 //Change value of free shipping bar. Show if you have free shipping or how much you need for get it
 const handleFreeShippingBar = async () => {
@@ -153,23 +158,24 @@ const createCarousel = () => {
   let allCarousels = [...document.querySelectorAll('.main-carousel')]
   
   allCarousels.forEach(carousel => {
-    new Flickity( carousel, {
-      cellAlign: 'left',
-      contain: true,
-      draggable: false
-    })
+    if(carousel.parentElement.id.includes("-card")){
+      new Flickity( carousel, {
+        cellAlign: 'left',
+        contain: true,
+        draggable: false
+      })
+    }
   })
 }
 
-//Change image in main-product
-const changeImg = (e) => {
-  if(e.target.id !== 'img-container') return
-
-  //let src = e.target.dataset.img.split("-")[0]
-  let alt = e.target.dataset.img.split("-")[1]
-
-  //let mainImgContainer = document.querySelector(".main-img-container")
-  //mainImgContainer.innerHTML = `<img src="${src}" alt="${alt}">`
+const handleImg = (e = null) => {
+  let alt
+  if(e === null) {
+    let mainCarousel = document.querySelector('.main-carousel')
+    alt = mainCarousel.querySelector('.is-selected').children[0].alt
+  }else{
+    alt = e.target.alt
+  }
 
   let form = document.querySelector(".product-form__input")
   let inputs = [...form.children]
@@ -182,5 +188,5 @@ const changeImg = (e) => {
     }else{
       input.checked = false
     }
-  })
+  }) 
 }

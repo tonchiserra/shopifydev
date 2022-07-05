@@ -3,22 +3,7 @@ master:
   theme_id: "133264179443"
   store: gonzaserra-test.myshopify.com
 
-test:
+fix-bugs:
   password: ${THEMEKIT_PASSWORD}
-  theme_id: "133883658483"
-  store: gonzaserra-test.myshopify.com
-
-devmale:
-  password: ${THEMEKIT_PASSWORD}
-  theme_id: "133883658481"
-  store: gonzaserra-test.myshopify.com
-
-tarea2:
-  password: ${THEMEKIT_PASSWORD}
-  theme_id: "133884969203"
-  store: gonzaserra-test.myshopify.com
-
-tarea3:
-  password: ${THEMEKIT_PASSWORD}
-  theme_id: "133887918323"
+  theme_id: "133904531699"
   store: gonzaserra-test.myshopify.com
