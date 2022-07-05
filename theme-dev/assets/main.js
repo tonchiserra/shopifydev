@@ -184,7 +184,7 @@ const handleImg = (e = null) => {
   inputs.forEach(input => {
     if(input.value.toLowerCase() === alt.split("#").pop()){
       input.checked = true
-      form.parentElement.dispatchEvent(new Event('change'))
+      form.parentElement.dispatchEvent(new CustomEvent('img:clicked', {}))
     }else{
       input.checked = false
     }
