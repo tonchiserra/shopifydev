@@ -34,7 +34,7 @@
   <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper">
       
-      <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true, "draggable": false }'>
+      <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true, "draggable": false }' data-currentcolor="{{ product.selected_or_first_available_variant.image.alt | split: '#' | last }}">
         {% for image in product.images %}
           <div class="carousel-cell">
             <img src="{{ image.src | image_url: width: 400 }}" alt="{{ image.alt }}">
@@ -48,20 +48,7 @@
           </div>
         {% endfor %}
       </div>
-      
-      {%- comment -%}
-      <div class="main-img-container">
-        <img src="{{ product.selected_or_first_available_variant.image.src | image_url: width: 400 }}" alt="{{ product.selected_or_first_available_variant.image.alt }}">
-      </div>
-      <div id="product-gallery" class="product-gallery">
-        {% for img in product.images %}
-          <div class="img-container">
-            <img data-img="{{ img.src | image_url: width: 400 }}-{{ img.alt }}" id="img-container" src="{{ img.src | image_url: width: 70 }}" alt="{{ img.alt }}">
-          </div>
-        {% endfor %}
-      </div>
 
-      {%- endcomment -%}
       {%- comment -%}
       <media-gallery id="MediaGallery-{{ section.id }}" role="region" {% if section.settings.enable_sticky_info %}class="product__media-gallery"{% endif %} aria-label="{{ 'products.product.media.gallery_viewer' | t }}" data-desktop-layout="{{ section.settings.gallery_layout }}">
         <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>

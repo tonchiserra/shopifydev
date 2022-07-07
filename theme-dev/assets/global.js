@@ -748,6 +748,19 @@ class VariantSelects extends HTMLElement {
     super();
     this.addEventListener('change', this.onVariantChange);
     this.addEventListener('img:clicked', this.onImageChange);
+    document.addEventListener('DOMContentLoaded', this.selectCurrentMedia)
+  }
+
+  selectCurrentMedia() {
+    let form = document.querySelector(".product-form__input")
+    let inputs = [...form.children]
+    inputs = inputs.filter(input => input.type === "radio")
+
+    inputs.forEach(input => {
+      if(input.checked){
+        form.parentElement.dispatchEvent(new Event('change', {}))
+      }
+    })
   }
 
   onImageChange() {
